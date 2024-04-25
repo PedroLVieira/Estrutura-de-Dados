@@ -17,6 +17,10 @@ class ListaDeTarefas():
         self.head = None
         self._size = 0
 
+    def criar_dicio(self, titulo, conteudo):
+        bloco = {titulo: conteudo}
+        return bloco
+    
     def append(self, elemento):
         if self.head:
             pointer = self.head
@@ -106,23 +110,18 @@ class ListaDeTarefas():
 
 
 
+lista_teste = ListaDeTarefas()
+# lista_teste.append(5)
+# lista_teste.append(6)
+# lista_teste.append(10)
+# lista_teste.append(7)
+# print(lista_teste.remove(10))
+# print(lista_teste)
 
-class Pessoa():
-    def __init__(self):
-        self.atividades = []
 
-    def adicionar_atividade(self, titulo, conteudo):
-        bloco = {titulo: conteudo}
-        self.atividades.append(bloco)
-        
-    def remover_atividade(self, titulo):
-        for i in self.atividades:
-            for chave in i.keys():
-                if chave == titulo:
-                    self.atividades.remove(i)
 
-                
+lista_teste.append(lista_teste.criar_dicio("test","testando"))
+lista_teste.append(lista_teste.criar_dicio("test2","testando2"))
+lista_teste.append(lista_teste.criar_dicio("test3","testando3"))
 
-p1 = Pessoa()
-p1.adicionar_atividade("test","testando")
-p1.remover_atividade("test")
+print(lista_teste)
