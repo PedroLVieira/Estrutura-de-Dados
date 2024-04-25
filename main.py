@@ -117,7 +117,7 @@ lista_teste = ListaDeTarefas()
 # print(lista_teste.remove(10))
 # print(lista_teste)
 
-p1 = Pessoa()
+
 lista_teste.append(lista_teste.criar_dicio("test","testando"))
 lista_teste.append(lista_teste.criar_dicio("test2","testando2"))
 lista_teste.append(lista_teste.criar_dicio("test3","testando3"))
