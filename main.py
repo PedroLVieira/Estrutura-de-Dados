@@ -109,7 +109,6 @@ class ListaDeTarefas():
 
 
 
-
 lista_teste = ListaDeTarefas()
 # lista_teste.append(5)
 # lista_teste.append(6)
@@ -117,7 +116,6 @@ lista_teste = ListaDeTarefas()
 # lista_teste.append(7)
 # print(lista_teste.remove(10))
 # print(lista_teste)
-
 
 
 lista_teste.append(lista_teste.criar_dicio("test","testando"))
