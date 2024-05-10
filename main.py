@@ -115,12 +115,24 @@ class ListaDeTarefas():
                 pointer = pointer.proximo
             raise ValueError(f"{elemento} não está na lista")
 
-    # REMOVENDO TAREFAS DA LISTA DE TAREFAS, COM BASE NA LISTA DE PRIORIDADES
+    # REMOVENDO TAREFAS DA LISTA DE TAREFAS, COM BASE NA LISTA DE PRIORIDADES NA QUAL ELE IRÁ REMOVER DO MENOR PARA O MAIOR NÚMERO
     def removerTarefaPrioritaria(self):
-        for priority in range(1, 5):  # Verifica da maior para a menor prioridade
+        for priority in sorted(self.priority_map.keys(), reverse=False): 
             if self.priority_map.get(priority):
                 task = self.priority_map[priority].pop(0)
-                return task
+                pointer = self.head
+                antecessor = None
+                while pointer:
+                    if pointer.valor == task:
+                        if antecessor:
+                            antecessor.proximo = pointer.proximo
+                        else:
+                            self.head = pointer.proximo
+                        pointer.proximo = None
+                        self._size -= 1
+                        return task
+                    antecessor = pointer
+                    pointer = pointer.proximo
         return None
 
     # ADICIONANDO TAREFAS À LISTA DE CONCLUÍDOS (
@@ -185,38 +197,44 @@ print()
 # REMOVENDO ELEMENTOS DA LISTA DE TAREFAS COM SUA PRIORIDADE, EM SEGUIDA, MOSTRANDO O ESTADO ATUAL DA LISTA
 
 atividades_faculdade.removerTarefaPrioritaria()
+
+
+
+print()
+print("-=" * 30)
+print()
 for item in atividades_faculdade:
     print(item)
-'''
-
-atvFaculdade_concluidas = ListaDeTarefas()
-atvFaculdade_concluidas.append_concluido(atividades_faculdade.removerTarefaPrioritaria())
-for item in atvFaculdade_concluidas:
-    print(item)
-
-for item in atividades_faculdade:
-    print(item)
-'''
 
 
-'''
-    lista_teste = ListaDeTarefas()
-    concluidos = ListaDeTarefas()
-    lista_teste.append(lista_teste.criar_dicio("test","testando"), 3)
-    lista_teste.append(lista_teste.criar_dicio("test2","testando2"), 1)
-    lista_teste.append(lista_teste.criar_dicio("test3","testando3"), 2)
-    concluidos.append_concluido(lista_teste.removerTarefaPrioritaria())
-    concluidos.append_concluido(lista_teste.removerTarefaPrioritaria())
-    print(lista_teste)
-    print(concluidos)
+# atvFaculdade_concluidas = ListaDeTarefas()
+# atvFaculdade_concluidas.append_concluido(atividades_faculdade.removerTarefaPrioritaria())
+# for item in atvFaculdade_concluidas:
+#     print(item)
+
+# for item in atividades_faculdade:
+#     print(item)
+
+
+
+
+    # lista_teste = ListaDeTarefas()
+    # concluidos = ListaDeTarefas()
+    # lista_teste.append(lista_teste.criar_dicio("test","testando"), 3)
+    # lista_teste.append(lista_teste.criar_dicio("test2","testando2"), 1)
+    # lista_teste.append(lista_teste.criar_dicio("test3","testando3"), 2)
+    # concluidos.append_concluido(lista_teste.removerTarefaPrioritaria())
+    # concluidos.append_concluido(lista_teste.removerTarefaPrioritaria())
+    # print(lista_teste)
+    # print(concluidos)
     
-    Exemplo de uso para remover a tarefa mais prioritária
+    # Exemplo de uso para remover a tarefa mais prioritária
     
-    while True:
-        tarefa = lista_teste.removerTarefaPrioritaria()
-        if tarefa:
-            print("Tarefa removida:", tarefa)
-        else:
-            break 
+    # while True:
+    #     tarefa = lista_teste.removerTarefaPrioritaria()
+    #     if tarefa:
+    #         print("Tarefa removida:", tarefa)
+    #     else:
+    #         break 
             
-'''
+
