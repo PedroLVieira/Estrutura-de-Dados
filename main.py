@@ -10,6 +10,16 @@ class ListaDeTarefas():
         bloco = {titulo: conteudo}
         return bloco
     
+    def append_concluido(self, elemento):
+        if self.head:
+            pointer = self.head
+            while(pointer.proximo):
+                pointer = pointer.proximo
+            pointer.proximo = Nodes(elemento)
+        else:
+            self.head = Nodes(elemento)
+
+
     def append(self, elemento, prioridade):
         if prioridade not in self.priority_map:
             self.priority_map[prioridade] = []
@@ -117,12 +127,14 @@ class ListaDeTarefas():
 
 
 lista_teste = ListaDeTarefas()
+concluidos = ListaDeTarefas()
 lista_teste.append(lista_teste.criar_dicio("test","testando"), 3)
 lista_teste.append(lista_teste.criar_dicio("test2","testando2"), 1)
 lista_teste.append(lista_teste.criar_dicio("test3","testando3"), 2)
-
+concluidos.append_concluido(lista_teste.removerTarefaPrioritaria())
+concluidos.append_concluido(lista_teste.removerTarefaPrioritaria())
 print(lista_teste)
-
+print(concluidos)
 # Exemplo de uso para remover a tarefa mais prioritária
 while True:
     tarefa = lista_teste.removerTarefaPrioritaria()
