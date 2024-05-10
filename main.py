@@ -1,27 +1,18 @@
 from nodes import Nodes
 
-class TaskManagement():
-    def __init__(self):
-        self.listas = []
-
-    def AdicionarListaTarefas(self, lista_tarefas):
-        self.listas.append(lista_tarefas)
-
-    def RemoverListaTarefas(self, lista_tarefas):
-        self.listas.remove(lista_tarefas)
-
-
-
 class ListaDeTarefas():
     def __init__(self):
         self.head = None
         self._size = 0
+        self.priority_map = {}
 
     def criar_dicio(self, titulo, conteudo):
         bloco = {titulo: conteudo}
         return bloco
     
-    def append(self, elemento):
+    def append(self, elemento, prioridade):
+        if prioridade not in self.priority_map:
+            self.priority_map[prioridade] = []
         if self.head:
             pointer = self.head
             while(pointer.proximo):
@@ -29,7 +20,9 @@ class ListaDeTarefas():
             pointer.proximo = Nodes(elemento)
         else:
             self.head = Nodes(elemento)
+        self.priority_map[prioridade].append(elemento)
         self._size+=1
+
     def __len__(self):
         return self._size
 
@@ -66,7 +59,7 @@ class ListaDeTarefas():
             indice +=1
         raise ValueError(f"{elemento} não está na lista")
 
-    def insert(self, index, elemento):
+    def insert(self, index, elemento, prioridade):
         new_Node = Nodes(elemento)
         if index == 0:
             new_Node.proximo = self.head
@@ -75,6 +68,7 @@ class ListaDeTarefas():
             pointer = self._getNode(index - 1)
             new_Node.proximo = pointer.proximo
             pointer.proximo = new_Node
+        self.priority_map[prioridade].append(elemento)
         self._size += 1
 
     def remove(self, elemento):
@@ -83,6 +77,9 @@ class ListaDeTarefas():
         elif self.head.valor == elemento:
             self.head = self.head.proximo
             self._size -= 1
+            for priority in self.priority_map:
+                if elemento in self.priority_map[priority]:
+                    self.priority_map[priority].remove(elemento)
             return elemento
         else:
             antecessor = self.head
@@ -91,11 +88,21 @@ class ListaDeTarefas():
                 if pointer.valor == elemento:
                     antecessor.proximo = pointer.proximo
                     pointer.proximo = None
+                    self._size -= 1
+                    for priority in self.priority_map:
+                        if elemento in self.priority_map[priority]:
+                            self.priority_map[priority].remove(elemento)
+                    return elemento
                 antecessor = pointer
                 pointer = pointer.proximo
-            self._size -= 1
-            return elemento
+            raise ValueError(f"{elemento} não está na lista")
 
+    def removerTarefaPrioritaria(self):
+        for priority in range(1, 5):  # Verifica da maior para a menor prioridade
+            if self.priority_map.get(priority):
+                task = self.priority_map[priority].pop(0)
+                return task
+        return None
 
     def __repr__(self):
         r = ""
@@ -104,22 +111,22 @@ class ListaDeTarefas():
             r += str(pointer.valor) + "->"
             pointer = pointer.proximo
         return r
+
     def __str__(self):
         return self.__repr__()
 
 
-
 lista_teste = ListaDeTarefas()
-# lista_teste.append(5)
-# lista_teste.append(6)
-# lista_teste.append(10)
-# lista_teste.append(7)
-# print(lista_teste.remove(10))
-# print(lista_teste)
-
-
-lista_teste.append(lista_teste.criar_dicio("test","testando"))
-lista_teste.append(lista_teste.criar_dicio("test2","testando2"))
-lista_teste.append(lista_teste.criar_dicio("test3","testando3"))
+lista_teste.append(lista_teste.criar_dicio("test","testando"), 3)
+lista_teste.append(lista_teste.criar_dicio("test2","testando2"), 1)
+lista_teste.append(lista_teste.criar_dicio("test3","testando3"), 2)
 
 print(lista_teste)
+
+# Exemplo de uso para remover a tarefa mais prioritária
+while True:
+    tarefa = lista_teste.removerTarefaPrioritaria()
+    if tarefa:
+        print("Tarefa removida:", tarefa)
+    else:
+        break
