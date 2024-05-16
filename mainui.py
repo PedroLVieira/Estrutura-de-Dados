@@ -14,7 +14,9 @@ class TaskWidget(QWidget):
         self.frame_layout = QVBoxLayout(self.frame)
         self.label = QLabel(task.get('Disciplina'))  
         self.label1 = QLabel(task.get('Descrição'))
-        self.button = QPushButton('Mark as Completed')
+        self.label2 = QLabel(task.get('prioridade'))
+        self.button = QPushButton('completa')
+        self.frame_layout.addWidget(self.label2)
         self.frame_layout.addWidget(self.label)
         self.frame_layout.addWidget(self.label1)
         self.frame_layout.addWidget(self.button)
@@ -55,10 +57,10 @@ class MainWindow(QWidget):
 if __name__ == '__main__':
     app = QApplication([])
     atividades_faculdade = ListaDeTarefas()
-    atividade_1 = {"Disciplina":"Estrutura de Dados","Descrição": "Criar um projeto sobre estruturas encadeadas"}
-    atividade_2 = {"Disciplina":"Redes", "Descrição": "Criar projeto no packet tracer"}
-    atividade_3 = {"Disciplina":"Extensão" , "Descrição": "enviar resumo para o professor"}
-    atividade_4 = {"Disciplina":"Extensão" , "Descrição": "enviar resumo para o professor"}
+    atividade_1 = {"Disciplina":"Estrutura de Dados","Descrição": "Criar um projeto sobre estruturas encadeadas","prioridade": "1"}
+    atividade_2 = {"Disciplina":"Redes", "Descrição": "Criar projeto no packet tracer","prioridade": "2"}
+    atividade_3 = {"Disciplina":"Extensão" , "Descrição": "enviar resumo para o professor","prioridade": "3"}
+    atividade_4 = {"Disciplina":"artes" , "Descrição": "enviar pintura para o professor","prioridade": "1"}
     atividades_faculdade.append(atividade_1, 1)
     atividades_faculdade.append(atividade_2, 2 )
     atividades_faculdade.append(atividade_3, 3 )
