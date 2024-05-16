@@ -110,17 +110,17 @@ def checklogin():
                 if linha[2] == user and linha[3] == password:
                     tipo = "user"
         if tipo == "admin":
-            tela_inicial.hide()
-            tabela.show()
+            tela_inicial.close()
+            
         elif tipo == "user":
-            tela_inicial.hide()
-            tabela.show()
+            tela_inicial.close()
+            
     except:
         tela_inicial.login_erro.setText("Login ou Senha Incorretos")
 
 app=QtWidgets.QApplication([])
 tela_inicial=uic.loadUi("tela_inicial.ui")
-tabela=uic.loadUi("tabela.ui")
+
 tela_inicial.entrar_inicial.clicked.connect(checklogin)
 tela_inicial.senha_inicial.setEchoMode(QtWidgets.QLineEdit.Password)
 tela_inicial.show()
