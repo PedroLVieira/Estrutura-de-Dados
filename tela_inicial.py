@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 import mysql.connector
-
+from mainui import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -110,11 +110,11 @@ def checklogin():
                 if linha[2] == user and linha[3] == password:
                     tipo = "user"
         if tipo == "admin":
-            tela_inicial.close()
-            
+            tela_inicial.hide()
+            window.show()
         elif tipo == "user":
-            tela_inicial.close()
-            
+            tela_inicial.hide()
+            window.show()
     except:
         tela_inicial.login_erro.setText("Login ou Senha Incorretos")
 

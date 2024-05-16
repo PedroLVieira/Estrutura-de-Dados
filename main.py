@@ -154,7 +154,7 @@ class ListaDeTarefas():
         r = ""
         pointer = self.head
         while(pointer):
-            r += str(pointer.valor) + "->"
+            r += str(pointer.valor)
             pointer = pointer.proximo
         return r
 
@@ -237,4 +237,4 @@ for item in atividades_faculdade:
     #     else:
     #         break 
             
-
+            
