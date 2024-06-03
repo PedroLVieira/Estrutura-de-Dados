@@ -170,41 +170,41 @@ projetos_sociais = ListaDeTarefas()
 metas_vida = ListaDeTarefas()
 
 # ADICIONANDO ELEMENTOS EM CADA LISTA DE TAREFAS, COM SUA DESCRIÇÃO E SEU TÍTULO
-atividade_1 = {"Estrutura de Dados" : "Criar um projeto sobre estruturas encadeadas"}
-atividade_2 = {"Redes" : "Criar projeto no packet tracer"}
-atividade_3 = {"Extensão" : "enviar resumo para o professor"}
-atividades_faculdade.append(atividade_1, 1)
-atividades_faculdade.append(atividade_2, 2 )
-atividades_faculdade.append(atividade_3, 3 )
+# atividade_1 = {"Estrutura de Dados" : "Criar um projeto sobre estruturas encadeadas"}
+# atividade_2 = {"Redes" : "Criar projeto no packet tracer"}
+# atividade_3 = {"Extensão" : "enviar resumo para o professor"}
+# atividades_faculdade.append(atividade_1, 1)
+# atividades_faculdade.append(atividade_2, 2 )
+# atividades_faculdade.append(atividade_3, 3 )
 
 # MOSTRANDO A MINHA LISTA DE TAREFAS
 
-for item in atividades_faculdade:
-    print(item)
-print()
-print("-=" * 30)
-print()
+# for item in atividades_faculdade:
+#     print(item)
+# print()
+# print("-=" * 30)
+# print()
 # REMOVENDO ELEMENTOS DA LISTA DE TAREFAS SEM SUA PRIORIDADE, EM SEGUIDA, MOSTRANDO O ESTADO ATUAL DA LISTA
 
-atividades_faculdade.remove(atividade_1)
-for item in atividades_faculdade:
-    print(item)
+# atividades_faculdade.remove(atividade_1)
+# for item in atividades_faculdade:
+#     print(item)
 
-print()
-print("-=" * 30)
-print()
+# print()
+# print("-=" * 30)
+# print()
 
 # REMOVENDO ELEMENTOS DA LISTA DE TAREFAS COM SUA PRIORIDADE, EM SEGUIDA, MOSTRANDO O ESTADO ATUAL DA LISTA
 
-atividades_faculdade.removerTarefaPrioritaria()
+# atividades_faculdade.removerTarefaPrioritaria()
 
 
 
-print()
-print("-=" * 30)
-print()
-for item in atividades_faculdade:
-    print(item)
+# print()
+# print("-=" * 30)
+# print()
+# for item in atividades_faculdade:
+#     print(item)
 
 
 # atvFaculdade_concluidas = ListaDeTarefas()
