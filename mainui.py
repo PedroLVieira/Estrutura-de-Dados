@@ -147,7 +147,7 @@ class MainWindow(QWidget):
         self.add_task_button.clicked.connect(self.show_add_task_window)
         self.button_layout.addWidget(self.add_task_button)
         
-        self.prev_button = QPushButton('Previous')
+        self.prev_button = QPushButton('Voltar')
         self.prev_button.setStyleSheet("""
             QPushButton {
                 background-color: #28a745; 
@@ -161,7 +161,7 @@ class MainWindow(QWidget):
         """)
         self.prev_button.clicked.connect(self.prev_task)
         
-        self.next_button = QPushButton('Next')
+        self.next_button = QPushButton('Passar')
         self.next_button.setStyleSheet("""
             QPushButton {
                 background-color: #ffc107; 

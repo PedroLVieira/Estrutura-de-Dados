@@ -88,35 +88,31 @@ conn = mysql.connector.connect(**config)
 cursor = conn.cursor()
 
 def checklogin():
-    tela_inicial.login_erro.setText("")
+
     user = tela_inicial.login_inicial.text()
     password = tela_inicial.senha_inicial.text()
-    cursor.execute("""
-                   
-                   SELECT * FROM admin;
-                   
-                   """)
+    cursor.execute("SELECT * FROM admin WHERE adminLogin = %s AND adminSenha = %s", (user, password))
+    admin_result = cursor.fetchone()
+    cursor.execute("SELECT * FROM user WHERE login = %s AND senha = %s", (user, password))
+    user_result = cursor.fetchone()
 
-    try:
-        for linha in cursor.fetchall():
-            if linha[1] == user and linha[2] == password:
-                tipo = "admin"
-            else:
-                cursor.execute("""
-                               
-                    SELECT * FROM user;
-                    
-                    """)
-                if linha[2] == user and linha[3] == password:
-                    tipo = "user"
-        if tipo == "admin":
-            tela_inicial.hide()
-            window.show()
-        elif tipo == "user":
-            tela_inicial.hide()
-            window.show()
-    except:
+    if admin_result:
+        tipo = "admin"
+    elif user_result:
+        tipo = "user"
+    else:
+        tipo = None
+
+    if tipo:
+        arquivo = retirar_banco()
+        tasks = json.loads(arquivo)
+        window = MainWindow(tasks)
+        tela_inicial.hide()  # Esconde a tela de login
+        window.show()# Mostra a nova janela
+    else:
         tela_inicial.login_erro.setText("Login ou Senha Incorretos")
+
+
 
 app=QtWidgets.QApplication([])
 tela_inicial=uic.loadUi("tela_inicial.ui")
@@ -125,3 +121,4 @@ tela_inicial.entrar_inicial.clicked.connect(checklogin)
 tela_inicial.senha_inicial.setEchoMode(QtWidgets.QLineEdit.Password)
 tela_inicial.show()
 app.exec()
+
